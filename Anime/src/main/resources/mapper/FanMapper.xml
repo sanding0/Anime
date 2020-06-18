@@ -31,4 +31,12 @@
     select id, uId, fan_id
     from fans
   </select>
+  <select id="selectByFanid" resultMap="BaseResultMap" >
+    select id, uId, fan_id
+    from fans where fan_id=#{f} and uId=#{u}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from fans
+    where fan_id=#{userid} and uId=#{videoUserid}
+  </delete>
 </mapper>

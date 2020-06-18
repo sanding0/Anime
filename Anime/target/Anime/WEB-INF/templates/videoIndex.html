@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>视频详情页</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" />
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        img{
+            width: 160px;
+            height: 90px;
+        }
+        .thcl{
+            width: 30px;
+            height: 20px;
+        }
+        .thcla{
+            width: 100px;
+            height: 20px;
+        }
+        span{
+            /*文本超出部分已...显示*/
+            text-overflow:ellipsis;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 100%;height: 100%;position: relative;">
+    <div style="width: 960px;height: 90px;margin-left: 15%;margin-top:0px;position: absolute;">
+        <table>
+            <th style="width: 600px;position: absolute;margin-left: 0px;">
+                <li style="margin-left: 0px;margin-top:10px;position: absolute;">
+                    <span th:text="${session.video.videoDesc}"></span>
+                </li>
+                <li style="margin-left: 0px;margin-top: 30px;position: absolute;">
+                    <span th:text="${session.video.createTime}" id="create_time"></span>
+                </li>
+                <li style="margin-left: 0px;margin-top: 50px;position: absolute;">
+                    <span th:text="${session.video.remark}"></span>
+                </li>
+            </th>
+            <th style="width: 200px;position: absolute;margin-left: 600px;">
+<!--                隐藏内容-->
+                <span id="userid" style="opacity: 0;" th:text="${session.user.id}"></span>
+                <span id="videoUserid" style="opacity: 0;" th:text="${session.videoUser.id}"></span>
+                <span id="videoid" style="opacity: 0;" th:text="${session.video.id}"></span>
+                <span id="videolike" style="opacity: 0;" th:text="${session.video.likeCounts}"></span>
+            </th>
+            <th style="margin: 5px;position: absolute;margin-left: 800px;">
+                <li style="position: absolute;margin-right: 0px;margin-top: 0px;">
+                    <img class="layui-nav-img" src="../img/indexImg/user_post.png" th:src="@{'..'+${session.videoUser.faceImage}}">
+                </li>
+                <li style="position: absolute;margin-right: 0px;margin-top: 30px;">
+                    <span th:text="${session.videoUser.remark}" style="width: 158px;height: 20px;"></span>
+                </li>
+                <li style="position: absolute;margin-right: 0px;margin-top: 50px;">
+                    <button id="fans0" th:if="${session.fanOrFollow}=='0'" style="width: 50px;height: 20px;background-color: blue;">关注</button>
+                    <button id="fans1" th:if="${session.fanOrFollow}=='1'" style="width: 50px;height: 20px;background-color: red">取关</button>
+                </li>
+            </th>
+        </table>
+    </div>
+    <div style="width: 640px;height: 360px;margin-left: 15%;margin-top:90px;position: absolute;">
+        <video style="width: 640px;height: 360px;" controls="controls" th:src="@{'..'+${session.video.videoPath}}"></video>
+    </div>
+    <div style="width: 640px;height: 90px;margin-left:15%;margin-top:450px;position: absolute;">
+        <table>
+            <tr style="width: 600px;position: absolute;margin-top: 0px;margin-left: 0px;">
+                <th style="width: 200px;">
+                    <a id="like">
+                        <div class="layui-icon layui-icon-praise" style="font-size: 50px;"></div>
+                        <span>点赞</span>
+                    </a>
+                </th>
+                <th style="width: 200px;">
+                    <a id="unlike">
+                        <div class="layui-icon layui-icon-tread" style="font-size: 50px;"></div>
+                        <span>不喜欢</span>
+                    </a>
+                </th>
+                <th style="width: 200px;">
+                    <a id="collection">
+                        <div class="layui-icon layui-icon-star" style="font-size: 50px;"></div>
+                        <span>收藏</span>
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 320px;height: 450px;margin-left: 872px;margin-top:90px;position: absolute;">
+        <table>
+            <tr>
+                <th class="item">
+                    <a class="img-link" id="video0">
+                        <img src="../img/indexImg/cont/main_pic.jpg" th:src="@{'..'+${session.likeVideo0.coverPath}}" alt="#">
+                        <span class="mask"></span>
+
+                    </a>
+                </th>
+                <th style="background-color: #00F7DE">
+                    <table style="margin: 2px;">
+                        <tr>
+                            <th class="thcl">视频名:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo0.videoDesc}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">时长:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo0.videoSeconds}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">用户:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo0.uid}"><i></i></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">播放量:</th>
+                            <th class="thcla"> <span th:text="${session.likeVideo0.playCounts}"><i></i></span></th>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <a class="img-link" id="video0">
+                        <img src="../img/indexImg/cont/main_pic.jpg" th:src="@{'..'+${session.likeVideo1.coverPath}}" alt="#">
+                        <span class="mask"></span>
+                    </a>
+                </th>
+                <th  style="background-color: #00F7DE">
+                    <table style="margin: 2px;">
+                        <tr>
+                            <th class="thcl">视频名:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo1.videoDesc}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">时长:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo1.videoSeconds}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">用户:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo1.uid}"><i></i></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">播放量:</th>
+                            <th class="thcla"> <span th:text="${session.likeVideo1.playCounts}"><i></i></span></th>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <a class="img-link" id="video0">
+                        <img src="../img/indexImg/cont/main_pic.jpg" th:src="@{'..'+${session.likeVideo2.coverPath}}" alt="#">
+                        <span class="mask"></span>
+                    </a>
+                </th>
+                <th  style="background-color: #00F7DE">
+                    <table style="margin: 2px;">
+                        <tr>
+                            <th class="thcl">视频名:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo2.videoDesc}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">时长:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo2.videoSeconds}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">用户:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo2.uid}"><i></i></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">播放量:</th>
+                            <th class="thcla"> <span th:text="${session.likeVideo2.playCounts}"><i></i></span></th>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <a class="img-link" id="video0">
+                        <img src="../img/indexImg/cont/main_pic.jpg" th:src="@{'..'+${session.likeVideo3.coverPath}}" alt="#">
+                        <span class="mask"></span>
+                    </a>
+                </th>
+                <th  style="background-color: #00F7DE">
+                    <table style="margin: 2px;">
+                        <tr>
+                            <th class="thcl">视频名:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo3.videoDesc}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">时长:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo3.videoSeconds}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">用户:</th>
+                            <th class="thcla"><span th:text="${session.likeVideo3.uid}"><i></i></span></th>
+                        </tr>
+                        <tr>
+                            <th class="thcl">播放量:</th>
+                            <th class="thcla"> <span th:text="${session.likeVideo3.playCounts}"><i></i></span></th>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </table>
+
+    </div>
+    <div style="margin-left:0;margin-top: 540px;position: absolute; width: 100%; height: 1000px "  >
+
+        <iframe src="../templates/comment.html" th:src="@{/templates/comment.html}" width="100%" height="100%" ></iframe>
+
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../layui/layui.js"  ></script>
+<script src="../js/videoIndex.js"></script>
+</body>
+</html>

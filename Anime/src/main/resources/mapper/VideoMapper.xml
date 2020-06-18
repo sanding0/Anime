@@ -55,6 +55,36 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, uId, video_desc, video_path, video_seconds, cover_path, like_counts, status, 
     play_counts, comments, create_time, remark
-    from videos
+    from videos where uId=#{userid} limit #{page},#{limit}
+  </select>
+<!--  以某一列排序，查询前n个-->
+  <select id="selectByCountsUp" resultMap="BaseResultMap" >
+    SELECT videos.id, users.nickname AS uId, video_desc, video_path, video_seconds, cover_path, like_counts, STATUS,
+    play_counts, comments, create_time, videos.remark
+    FROM videos,users WHERE videos.uId=users.id ORDER BY
+     <if test="string=='time'">
+       create_time ASC LIMIT 8
+     </if>
+    <if test="string=='like'">
+      like_counts asc limit 4
+    </if>
+  </select>
+  <select id="selectByNum" resultMap="BaseResultMap" >
+    SELECT videos.id, users.nickname AS uId, video_desc, video_path, video_seconds, cover_path, like_counts, STATUS,
+    play_counts, comments, create_time, videos.remark
+    FROM videos,users WHERE videos.uId=users.id ORDER BY create_time asc limit #{num},#{number}
+  </select>
+  <select id="selectByNumber" resultMap="BaseResultMap" >
+    SELECT videos.id,uId, video_desc, video_path, video_seconds, cover_path, like_counts, STATUS,
+    play_counts, comments, create_time, videos.remark
+    FROM videos,users WHERE videos.uId=users.id ORDER BY create_time asc limit #{i},#{j}
+  </select>
+  <update id="updateByLike">
+    update videos
+    set like_counts = #{num}
+    where id = #{id}
+  </update>
+  <select id="getCount"  resultType="integer">
+    select count(id) from videos
   </select>
 </mapper>

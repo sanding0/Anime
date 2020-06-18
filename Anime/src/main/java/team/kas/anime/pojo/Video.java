@@ -8,7 +8,7 @@ public class Video implements Serializable {
 
     private String uid;
 
-    private String videoDesc;
+    private String videoDesc;//标题
 
     private String videoPath;
 
@@ -26,7 +26,25 @@ public class Video implements Serializable {
 
     private Date createTime;
 
-    private String remark;
+    private String remark;//描述
+
+    public Video() {
+    }
+
+    public Video(String id, String uid, String videoDesc, String videoPath, Float videoSeconds, String coverPath, Long likeCounts, Integer status, Long playCounts, Long comments, Date createTime, String remark) {
+        this.id = id;
+        this.uid = uid;
+        this.videoDesc = videoDesc;
+        this.videoPath = videoPath;
+        this.videoSeconds = videoSeconds;
+        this.coverPath = coverPath;
+        this.likeCounts = likeCounts;
+        this.status = status;
+        this.playCounts = playCounts;
+        this.comments = comments;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
 
     private static final long serialVersionUID = 1L;
 

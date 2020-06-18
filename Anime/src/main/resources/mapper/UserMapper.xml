@@ -46,9 +46,22 @@
     from users
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, username, password, face_image, nickname, fans_counts, follow_counts,
+    iphone, collection, remark
+    from users
+    where username = #{username}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, username, password, face_image, nickname, fans_counts, follow_counts, 
     iphone, collection, remark
     from users
+  </select>
+  <select id="selectByNickName" parameterType="string" resultMap="BaseResultMap" >
+    select id, username, password, face_image, nickname, fans_counts, follow_counts,
+    iphone, collection, remark
+    from users where nickname=#{uid}
   </select>
 </mapper>

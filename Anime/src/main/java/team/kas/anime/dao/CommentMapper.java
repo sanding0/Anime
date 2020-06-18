@@ -13,4 +13,16 @@ public interface CommentMapper {
     List<Comment> selectAll();
 
     int updateByPrimaryKey(Comment record);
+
+//    int savecomment(Comment record);
+//
+//    List<Comment> findByParentIdNull(String pId);
+//
+//    List<Comment> findByParentIdNotNull(String id);
+//
+//    List<Comment> findByReplayId(String childId);
+
+    List<Comment> getCommentListByVideoId(String vid);
+
+    //findByReplayId
 }

@@ -39,7 +39,7 @@
     <!--<视图解析器   控制返回路径的跳转>-->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value="/WEB-INF/templates/"/>
         <property name="suffix" value=".html"/>
         <property name="characterEncoding" value="UTF-8"/>
         <property name="order" value="1"/>
@@ -67,7 +67,7 @@
     </mvc:resources>
     <!--<mvc:resources location="/WEB-INF/templates/" mapping="/templates/**">-->
     <!--</mvc:resources>-->
-    <mvc:resources location="/WEB-INF/pages/" mapping="/pages/**">
+    <mvc:resources location="/WEB-INF/templates/" mapping="/templates/**">
     </mvc:resources>
     <mvc:resources location="/WEB-INF/layui/" mapping="/layui/**">
     </mvc:resources>

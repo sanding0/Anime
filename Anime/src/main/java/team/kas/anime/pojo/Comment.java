@@ -1,47 +1,88 @@
 package team.kas.anime.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Comment implements Serializable {
-    private String id;
-
-    private String pid;
-
-    private String uid;
-
+    private Integer id;
+    /**
+     * 视频id
+     */
     private String vid;
-
-    private String content;
-
+    /**
+     * 被评论人
+     */
+    private String uid;
+    /**
+     * 时间
+     */
     private Date commentTime;
+    /**
+     * 评论内容
+     */
+    private String content;
+    /**
+     * 父评论id(可以为空)
+     */
+    private Integer pid;
+    /**
+     * 每一个评论里面都可能有自己的子评论集合
+     */
+    private String toname;
+    private String owner;
 
-    private String remark;
+    public String getToname() {
+        return toname;
+    }
 
-    private static final long serialVersionUID = 1L;
+    public void setToname(String toname) {
+        this.toname = toname;
+    }
 
-    public String getId() {
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    private List<Comment> childComment = new ArrayList<>();
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getPid() {
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
-    public String getUid() {
-        return uid;
+    public List<Comment> getChildComment() {
+        return childComment;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
+    public void setChildComment(List<Comment> childComment) {
+        this.childComment = childComment;
     }
 
     public String getVid() {
@@ -49,15 +90,15 @@ public class Comment implements Serializable {
     }
 
     public void setVid(String vid) {
-        this.vid = vid == null ? null : vid.trim();
+        this.vid = vid;
     }
 
-    public String getContent() {
-        return content;
+    public String getUid() {
+        return uid;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public Date getCommentTime() {
@@ -68,11 +109,16 @@ public class Comment implements Serializable {
         this.commentTime = commentTime;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", vid='" + vid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", commentTime=" + commentTime +
+                ", content='" + content + '\'' +
+                ", pid=" + pid +
+                ", childComment=" + childComment +
+                '}';
     }
 }

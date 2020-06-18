@@ -9,19 +9,14 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+      <result column="toname" property="toname" jdbcType="VARCHAR" />
+      <result column="owner" property="owner" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from comments
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.kas.anime.pojo.Comment" >
-    insert into comments (id, pId, uId, 
-      vId, content, comment_time, 
-      remark)
-    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
-      #{vid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
+
   <update id="updateByPrimaryKey" parameterType="team.kas.anime.pojo.Comment" >
     update comments
     set pId = #{pid,jdbcType=VARCHAR},
@@ -37,8 +32,48 @@
     from comments
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, pId, uId, vId, content, comment_time, remark
-    from comments
+
+
+  <!--查询父级评论-->
+  <select id="findByParentIdNull" resultMap="BaseResultMap" >
+      select id, pId, uId, vId, content, comment_time, remark
+        from comment c
+        where c.pId = #{pId}
+        order by c.create_time desc
   </select>
+
+  <!--查询一级回复-->
+  <select id="findByParentIdNotNull" resultMap="BaseResultMap">
+        select id, pId, uId, vId, content, comment_time, remark
+        from comment c
+        where c.pId = #{id}
+        order by c.create_time desc
+   </select>
+
+
+  <insert id="savecomment" parameterType="team.kas.anime.pojo.Comment" >
+    insert into comments (id, pId, uId,
+      vId, content, comment_time,
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
+      #{vid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+
+
+  <!--查询二级以及所有子集回复-->
+  <select id="findByReplayId" resultMap="BaseResultMap">
+        select id, pId, uId, vId, content, comment_time, remark
+        from comment c
+        where c.pId = #{childId}
+        order by c.create_time desc
+    </select>
+
+
+  <select id="getCommentListByVideoId" resultMap="BaseResultMap">
+        select id, pId, uId, vId, content, comment_time, remark,toname,owner
+        from comments
+        where vId = #{vid}
+    </select>
+
 </mapper>
