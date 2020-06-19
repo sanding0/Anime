@@ -1,6 +1,9 @@
 package team.kas.anime.dao;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import team.kas.anime.pojo.Comment;
 
 public interface CommentMapper {
@@ -23,6 +26,13 @@ public interface CommentMapper {
 //    List<Comment> findByReplayId(String childId);
 
     List<Comment> getCommentListByVideoId(String vid);
+
+    void addcomment(@Param("pid") String pid ,@Param("uid") String uid, @Param("vid") String vid
+            , @Param("content") String content,  @Param("date")Date date, @Param("owner") String owner,@Param("toname") String toname);
+
+
+    String selectPName(String pid);
+
 
     //findByReplayId
 }

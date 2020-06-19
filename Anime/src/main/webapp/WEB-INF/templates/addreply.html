@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" href="../css/digui.css" th:href="@{/css/digui.css}">
+    <link rel="stylesheet" href="../css/comment.css" th:href="@{/css/comment.css}">
+    <link rel="stylesheet" href="../css/article.css" th:href="@{/css/article.css}">
+
+
+
+</head>
+<body>
+
+<div class="head">
+    <div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">回复</label>
+            <div class="layui-input-block">
+                <textarea id="replycontent"  placeholder="发表你的看法吧!" class="layui-textarea" ></textarea>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-normal" id="replybtn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script src="../js/jquery-2.1.1.min.js" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+<script src="../js/digui.js" th:src="@{/js/digui.js}" ></script>
+</html>

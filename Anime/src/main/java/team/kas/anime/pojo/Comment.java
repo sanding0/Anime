@@ -26,7 +26,7 @@ public class Comment implements Serializable {
     /**
      * 父评论id(可以为空)
      */
-    private Integer pid;
+    private String pid;
     /**
      * 每一个评论里面都可能有自己的子评论集合
      */
@@ -51,6 +51,7 @@ public class Comment implements Serializable {
 
     private List<Comment> childComment = new ArrayList<>();
 
+
     public Integer getId() {
         return id;
     }
@@ -58,7 +59,6 @@ public class Comment implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public String getContent() {
         return content;
@@ -69,11 +69,11 @@ public class Comment implements Serializable {
     }
 
 
-    public Integer getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -107,6 +107,20 @@ public class Comment implements Serializable {
 
     public void setCommentTime(Date commentTime) {
         this.commentTime = commentTime;
+    }
+
+    public Comment(){
+    }
+
+    public Comment(Integer id, String vid, String uid, Date commentTime, String content, String pid, String toname, String owner) {
+        this.id = id;
+        this.vid = vid;
+        this.uid = uid;
+        this.commentTime = commentTime;
+        this.content = content;
+        this.pid = pid;
+        this.toname = toname;
+        this.owner = owner;
     }
 
     @Override
